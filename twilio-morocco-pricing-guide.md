@@ -43,68 +43,39 @@
 
 ---
 
-## Morocco Pricing Summary (USD)
+## Morocco Pricing Summary (MAD)
 
 ### SMS Pricing
 
 | Direction | Price per Segment |
 | --------- | ----------------- |
-| Outbound  | $0.0695           |
-| Inbound   | $0.0075           |
+| Outbound  | 0.70 MAD          |
+| Inbound   | 0.08 MAD          |
 
 **Note**: Messages are charged per segment. A message with 161-320 characters counts as 2 segments.
 
-### Voice Pricing (Elastic SIP Trunking)
+### Voice Pricing
 
-| Call Type        | Price per Minute |
-| ---------------- | ---------------- |
-| Local (Landline) | $0.4703          |
-| Mobile           | $0.8295          |
-| Inbound          | $0.0085          |
+**What is this**: Phone call costs when your app makes or receives calls using Twilio's voice service
+
+| Call Type                             | Price per Minute | Description                                                 |
+| ------------------------------------- | ---------------- | ----------------------------------------------------------- |
+| **Outbound to Landline** (fixed line) | 4.70 MAD         | Calling home/office phones (cheaper)                        |
+| **Outbound to Mobile** (cell phones)  | 8.30 MAD         | Calling mobile/cell phones (more expensive, almost 2x cost) |
+| **Inbound** (receiving calls)         | 0.09 MAD         | Someone calls your Twilio number                            |
 
 ### WhatsApp Pricing
 
-| Component                    | Price                    |
-| ---------------------------- | ------------------------ |
-| Twilio Fee (per message)     | $0.0050                  |
-| Meta Marketing Template      | $0.0330                  |
-| Meta Utility Template        | $0.0120                  |
-| Meta Authentication Template | $0.0070                  |
-| Service Conversations        | Free (within 24h window) |
+**How it works**: Every WhatsApp message costs **Twilio Fee (0.05 MAD) + Meta Fee** (depends on message type)
 
-**Customer Service Window**: Inbound user messages open a 24-hour window for free responses. After this window, template messages with Meta fees apply.
+| Message Type                     | Twilio Fee | Meta Fee | **Total Cost** |
+| -------------------------------- | ---------- | -------- | -------------- |
+| **Marketing** (promotions, ads)  | 0.05 MAD   | 0.33 MAD | **0.38 MAD**   |
+| **Utility** (order updates, etc) | 0.05 MAD   | 0.12 MAD | **0.17 MAD**   |
+| **Authentication** (OTP, codes)  | 0.05 MAD   | 0.07 MAD | **0.12 MAD**   |
+| **Service Reply** (within 24h)   | 0.05 MAD   | Free     | **0.05 MAD**   |
 
----
-
-## What This Means for Our App
-
-### Real-World Scenarios
-
-**SMS Use Case: 2FA Code**
-
-- 1 verification SMS (1 segment): **$0.0695**
-- If user replies, inbound: **$0.0075**
-- Total cost per verification cycle: **~$0.077**
-
-**Voice Use Case: OTP Verification Call**
-
-- 30-second call to mobile: **$0.4148** (0.5 min × $0.8295)
-- More expensive than SMS for simple verification
-
-**WhatsApp Use Case: Order Confirmation**
-
-- Initial template message (utility): **$0.0170** ($0.005 Twilio + $0.012 Meta)
-- Customer replies: Opens 24h free window
-- Follow-up messages within 24h: **$0.0050** (Twilio fee only)
-- Response after 24h: **$0.0170** (requires new template)
-
-**Cost Comparison: 1,000 Verifications**
-
-| Channel  | Method                  | Cost    |
-| -------- | ----------------------- | ------- |
-| SMS      | Standard OTP            | $69.50  |
-| Voice    | 30-sec call to mobile   | $414.75 |
-| WhatsApp | Authentication template | $12.00  |
+**Customer Service Window**: When a user messages you first, you have 24 hours to reply for free (only 0.05 MAD Twilio fee, no Meta fee). After 24 hours, you must use templates with Meta fees.
 
 ---
 
@@ -113,18 +84,10 @@
 | Metric                       | SMS           | Voice          | WhatsApp                  |
 | ---------------------------- | ------------- | -------------- | ------------------------- |
 | **Best For**                 | Codes, alerts | Urgent support | Rich interactions         |
-| **Typical Cost/Transaction** | $0.07-$0.10   | $0.40-$0.80    | $0.01-$0.02               |
+| **Typical Cost/Transaction** | 0.70-1.00 MAD | 4.00-8.00 MAD  | 0.10-0.20 MAD             |
 | **User Preference**          | High          | Medium         | Very High                 |
 | **Delivery Speed**           | Seconds       | Immediate      | Seconds                   |
 | **Media Support**            | No            | Voice only     | Yes (images, docs, video) |
-
-### Recommendations
-
-1. **Use WhatsApp** for authentication/OTP → Lowest cost ($0.012/verification)
-2. **Use SMS** as fallback for users without WhatsApp → Moderate cost ($0.0695/message)
-3. **Limit Voice** to high-priority customer support → Highest cost ($0.47-$0.83/min)
-4. **Leverage 24h WhatsApp windows** for customer service conversations → Free responses
-5. **Optimize SMS length** to stay within 160 characters → Avoid multi-segment charges
 
 ---
 
