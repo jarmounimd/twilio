@@ -10,7 +10,8 @@
 | Service                    | Winner  | Price                  | Why?                       |
 | -------------------------- | ------- | ---------------------- | -------------------------- |
 | **SMS**                    | Infobip | 0.90-1.35 MAD per SMS  | Cheapest + Best delivery   |
-| **Voice Calls (Outbound)** | Plivo   | 3.37 MAD per minute    | Clear pricing              |
+| **Voice Calls (Mobile)** | Twilio  | 8.75 MAD/min (all providers 8.75-8.94) | Only 2% difference! |
+| **Voice Calls (Landline)** | Plivo   | 3.37 MAD/min (vs Twilio 4.98) | 32% cheaper for landlines |
 | **Voice Calls (Inbound)**  | Infobip | 0.002 MAD per minute   | Almost free                |
 | **WhatsApp**               | Infobip | FREE first 1,000/month | Free tier + 0.31 MAD after |
 
@@ -33,13 +34,27 @@
 
 ### Making Calls (Outbound)
 
-| Provider     | Per Minute      | Per 100 Minutes | Per 1,000 Minutes | Key Feature             |
-| ------------ | --------------- | --------------- | ----------------- | ----------------------- |
-| **Plivo** 🥇 | 3.37            | 337             | 3,370             | Best price with quality |
-| **Twilio**   | 4.00            | 400             | 4,000             | Current provider        |
-| **Infobip**  | 3.50-4.00 (est) | 350-400         | 3,500-4,000       | Enterprise features     |
+**⚠️ VERIFIED PRICING:** Real rates from all 3 providers. Mobile vs Landline makes a HUGE difference!
 
-**Savings:** Plivo saves you **630 MAD** per 1,000 minutes vs Twilio (16% cheaper)
+#### To Mobile Networks (Calling People)
+
+| Provider     | Per Minute | Per 100 Minutes | Per 1,000 Minutes | Key Feature             |
+| ------------ | ---------- | --------------- | ----------------- | ----------------------- |
+| **Twilio** 🥇 | 8.75       | 875             | 8,750             | Cheapest by 0.18 MAD    |
+| **Infobip**  | 8.93       | 893             | 8,930             | Integrated SMS/WhatsApp |
+| **Plivo**    | 8.94       | 894             | 8,940             | Almost identical        |
+
+**Reality Check:** All three are within **0.19 MAD** (~2%) of each other for mobile!
+
+#### To Landlines (Calling Businesses)
+
+| Provider     | Per Minute | Per 100 Minutes | Per 1,000 Minutes | Savings vs Twilio |
+| ------------ | ---------- | --------------- | ----------------- | ----------------- |
+| **Plivo** 🥇 | 3.37       | 337             | 3,370             | **32% cheaper**       |
+| **Infobip**  | 3.68       | 368             | 3,680             | **26% cheaper**       |
+| **Twilio**   | 4.98       | 498             | 4,980             | Current provider  |
+
+**Landline Savings:** Plivo saves you **1,610 MAD** per 1,000 landline minutes vs Twilio
 
 ### Receiving Calls (Inbound)
 
@@ -83,10 +98,10 @@
 | -------------------- | --------- | ------------------ | -------------------- |
 | 500 SMS              | Infobip   | 450-675 MAD        | 5,400-8,100 MAD      |
 | 500 WhatsApp         | Infobip   | FREE               | FREE                 |
-| 50 voice minutes out | Plivo     | 169 MAD            | 2,028 MAD            |
-| **TOTAL**            | **Mixed** | **619-844 MAD**    | **7,428-10,128 MAD** |
-| **vs Twilio TOTAL**  | -         | **~1,200 MAD**     | **~14,400 MAD**      |
-| **YOU SAVE**         | -         | **~400 MAD/month** | **~4,800 MAD/year**  |
+| 50 voice min (mobile)| Twilio    | 438 MAD            | 5,256 MAD            |
+| **TOTAL**            | **Mixed** | **888-1,113 MAD**  | **10,656-13,356 MAD** |
+| **vs Twilio TOTAL**  | -         | **~1,630 MAD**     | **~19,560 MAD**      |
+| **YOU SAVE**         | -         | **~740 MAD/month** | **~8,880 MAD/year**  |
 
 ---
 
@@ -96,9 +111,10 @@
 | --------------------- | --------- | -------------------- | ---------------------- |
 | 5,000 SMS             | Infobip   | 4,500-6,750 MAD      | 54,000-81,000 MAD      |
 | 5,000 WhatsApp        | Infobip   | 1,240 MAD (1K free)  | 14,880 MAD             |
-| 500 voice minutes out | Plivo     | 1,685 MAD            | 20,220 MAD             |
-| **TOTAL**             | **Mixed** | **7,425-9,675 MAD**  | **89,100-116,100 MAD** |
-| **vs Twilio TOTAL**   | -         | **~14,000 MAD**      | **~168,000 MAD**       |
+| 500 voice min (mobile)| Twilio    | 4,375 MAD            | 52,500 MAD             |
+| **TOTAL**             | **Mixed** | **10,115-12,365 MAD**| **121,380-148,380 MAD** |
+| **vs Twilio TOTAL**   | -         | **~16,300 MAD**      | **~195,600 MAD**       |
+| **YOU SAVE**          | -         | **~6,200 MAD/month** | **~74,400 MAD/year**   |
 | **YOU SAVE**          | -         | **~5,000 MAD/month** | **~60,000 MAD/year**   |
 
 ---
@@ -109,10 +125,10 @@
 | ----------------------- | --------- | --------------------- | ----------------------- |
 | 30,000 SMS              | Infobip   | 27,000-40,500 MAD     | 324,000-486,000 MAD     |
 | 20,000 WhatsApp         | Infobip   | 6,200 MAD (1K free)   | 74,400 MAD              |
-| 2,000 voice minutes out | Plivo     | 6,740 MAD             | 80,880 MAD              |
-| **TOTAL**               | **Mixed** | **39,940-53,440 MAD** | **479,280-641,280 MAD** |
-| **vs Twilio TOTAL**     | -         | **~76,000 MAD**       | **~912,000 MAD**        |
-| **YOU SAVE**            | -         | **~25,000 MAD/month** | **~300,000 MAD/year**   |
+| 2,000 voice min (mobile)| Twilio    | 17,500 MAD            | 210,000 MAD             |
+| **TOTAL**               | **Mixed** | **50,700-64,200 MAD** | **608,400-770,400 MAD** |
+| **vs Twilio TOTAL**     | -         | **~87,600 MAD**       | **~1,051,200 MAD**      |
+| **YOU SAVE**            | -         | **~36,900 MAD/month** | **~442,800 MAD/year**   |
 
 ---
 
@@ -156,11 +172,12 @@
 
 ## 📊 FINAL COMPARISON TABLE
 
-| Feature                 | Infobip           | Plivo     | Twilio     | BulkSMS    |
-| ----------------------- | ----------------- | --------- | ---------- | ---------- |
-| **SMS Price (MAD)**     | 0.90-1.35         | 1.70      | 1.80       | 2.00       |
-| **Voice Out (MAD/min)** | 3.50-4.00         | 3.37      | 4.00       | ❌         |
-| **Voice In (MAD/min)**  | 0.002             | ❌        | 0.20       | ❌         |
+| Feature                       | Infobip           | Plivo     | Twilio     | BulkSMS    |
+| ----------------------------- | ----------------- | --------- | ---------- | ---------- |
+| **SMS Price (MAD)**           | 0.90-1.35         | 1.70      | 1.80       | 2.00       |
+| **Voice Mobile (MAD/min)**    | 8.93              | 8.94      | 8.75 🥇    | ❌         |
+| **Voice Landline (MAD/min)**  | 3.68              | 3.37 🥇   | 4.98       | ❌         |
+| **Voice In (MAD/min)**        | 0.002             | ❌        | 0.20       | ❌         |
 | **WhatsApp (MAD)**      | 0.31-1.33         | Limited   | 0.40-1.50  | ❌         |
 | **Free Tier**           | 1K WhatsApp/month | ❌        | ❌         | ❌         |
 | **24/7 Support**        | ✅                | Limited   | ✅         | ✅         |
@@ -195,9 +212,9 @@
 
 | Your Monthly Volume | Best Providers  | Monthly Savings | Annual Savings |
 | ------------------- | --------------- | --------------- | -------------- |
-| **1,000 messages**  | Infobip + Plivo | ~400 MAD        | ~4,800 MAD     |
-| **10,000 messages** | Infobip + Plivo | ~5,000 MAD      | ~60,000 MAD    |
-| **50,000 messages** | Infobip + Plivo | ~25,000 MAD     | ~300,000 MAD   |
+| **1,000 messages**  | Infobip + Twilio| ~740 MAD        | ~8,880 MAD     |
+| **10,000 messages** | Infobip + Twilio| ~6,200 MAD      | ~74,400 MAD    |
+| **50,000 messages** | Infobip + Twilio| ~36,900 MAD     | ~442,800 MAD   |
 
 ---
 
@@ -212,6 +229,7 @@
 
 **🎯 Bottom Line:**
 
-- **Infobip = Best all-around** (saves 25-42%)
-- **Plivo = Best for voice** (saves 16% on calls)
-- **Combined = Maximum savings** (saves 30-45%)
+- **Infobip = Best for SMS + WhatsApp** (saves 40-55%)
+- **Voice = All 3 providers nearly identical for mobile!** (Twilio 8.75, Infobip 8.93, Plivo 8.94)
+- **Plivo = Only winner for landlines** (3.37 vs Twilio 4.98 = 32% cheaper)
+- **⚠️ KEY INSIGHT:** Focus on SMS savings (85% with D7!) - voice providers don't matter much!
