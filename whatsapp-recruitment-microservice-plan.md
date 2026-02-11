@@ -128,51 +128,57 @@ Once the candidate **replies** to our template:
 
 **Exchange Rate:** 1 USD = 10.5 MAD (February 2026)
 
-| Scenario                               | Cost per Message | Notes                         |
-| -------------------------------------- | ---------------- | ----------------------------- |
-| **Business-Initiated (First Message)** | ~0.50 MAD        | Using approved template       |
-| **Candidate Replies**                  | 0.00 MAD (FREE)  | Opens 24-hour window          |
-| **Ongoing Conversation**               | 0.00 MAD (FREE)  | All messages free for 24h     |
-| **Service Conversation**               | 0.00 MAD (FREE)  | When candidate messages first |
-| **Monthly Platform Fee**               | 0.00 MAD         | Meta Cloud API is free        |
+**⚠️ IMPORTANT:** As of July 1, 2025, WhatsApp charges **per MESSAGE** (not per conversation)!
+
+| Scenario                                  | Cost per Message (USD) | Cost per Message (MAD) | Notes                         |
+| ----------------------------------------- | ---------------------- | ---------------------- | ----------------------------- |
+| **Business-Initiated (Utility Template)** | ~$0.0126 USD           | **~0.13 MAD** 🎉       | Using approved template       |
+| **Marketing Template**                    | ~$0.0540 USD           | ~0.57 MAD              | Promotional messages          |
+| **Authentication Template**               | ~$0.0124 USD           | ~0.13 MAD              | OTP, verification codes       |
+| **Candidate Replies**                     | 0.00 USD (FREE)        | 0.00 MAD (FREE)        | Opens 24-hour window          |
+| **Ongoing Conversation**                  | 0.00 USD (FREE)        | 0.00 MAD (FREE)        | All messages free for 24h     |
+| **Service Conversation**                  | 0.00 USD (FREE)        | 0.00 MAD (FREE)        | When candidate messages first |
+| **Monthly Platform Fee**                  | 0.00 USD               | 0.00 MAD               | Meta Cloud API is free        |
+
+**💡 Reality:** Utility messages cost **~0.13 MAD** (not 0.50 MAD!) - that's **75% cheaper** than estimated!
 
 ### Real Cost Examples
 
 #### Small Scale (50 candidates/month)
 
-| Activity            | Calculation       | Monthly Cost     |
-| ------------------- | ----------------- | ---------------- |
-| 50 initial messages | 50 × 0.50 MAD     | **25 MAD**       |
-| Candidate replies   | FREE              | 0 MAD            |
-| Follow-up messages  | FREE (within 24h) | 0 MAD            |
-| Platform fees       | Meta Cloud API    | 0 MAD            |
-| **TOTAL**           |                   | **25 MAD/month** |
+| Activity            | Calculation       | Monthly Cost       |
+| ------------------- | ----------------- | ------------------ |
+| 50 initial messages | 50 × 0.13 MAD     | **6.50 MAD** 🎉    |
+| Candidate replies   | FREE              | 0 MAD              |
+| Follow-up messages  | FREE (within 24h) | 0 MAD              |
+| Platform fees       | Meta Cloud API    | 0 MAD              |
+| **TOTAL**           |                   | **6.50 MAD/month** |
 
 #### Medium Scale (500 candidates/month)
 
-| Activity                 | Calculation    | Monthly Cost      |
-| ------------------------ | -------------- | ----------------- |
-| 500 initial messages     | 500 × 0.50 MAD | **250 MAD**       |
-| All replies & follow-ups | FREE           | 0 MAD             |
-| **TOTAL**                |                | **250 MAD/month** |
+| Activity                 | Calculation    | Monthly Cost     |
+| ------------------------ | -------------- | ---------------- |
+| 500 initial messages     | 500 × 0.13 MAD | **65 MAD** 🎉    |
+| All replies & follow-ups | FREE           | 0 MAD            |
+| **TOTAL**                |                | **65 MAD/month** |
 
 #### Large Scale (2,000 candidates/month)
 
-| Activity                 | Calculation      | Monthly Cost        |
-| ------------------------ | ---------------- | ------------------- |
-| 2,000 initial messages   | 2,000 × 0.50 MAD | **1,000 MAD**       |
-| All replies & follow-ups | FREE             | 0 MAD               |
-| **TOTAL**                |                  | **1,000 MAD/month** |
+| Activity                 | Calculation      | Monthly Cost      |
+| ------------------------ | ---------------- | ----------------- |
+| 2,000 initial messages   | 2,000 × 0.13 MAD | **260 MAD** 🎉    |
+| All replies & follow-ups | FREE             | 0 MAD             |
+| **TOTAL**                |                  | **260 MAD/month** |
 
 ### 📊 Cost Comparison: vs SMS Providers
 
-| Volume           | WhatsApp Direct  | Twilio SMS  | D7 Networks SMS | Savings                      |
-| ---------------- | ---------------- | ----------- | --------------- | ---------------------------- |
-| 500 msgs         | **250 MAD**      | 900 MAD     | 145 MAD         | WhatsApp cheaper than Twilio |
-| 2,000 msgs       | **1,000 MAD**    | 3,600 MAD   | 580 MAD         | D7 SMS still cheaper         |
-| **With Replies** | **FREE replies** | Pay per SMS | Pay per SMS     | **Huge advantage**           |
+| Volume           | WhatsApp Direct  | Twilio SMS  | D7 Networks SMS | Savings                           |
+| ---------------- | ---------------- | ----------- | --------------- | --------------------------------- |
+| 500 msgs         | **65 MAD** 🎉    | 900 MAD     | 145 MAD         | **WhatsApp 55% cheaper than D7!** |
+| 2,000 msgs       | **260 MAD** 🎉   | 3,600 MAD   | 580 MAD         | **WhatsApp 55% cheaper than D7!** |
+| **With Replies** | **FREE replies** | Pay per SMS | Pay per SMS     | **Huge advantage**                |
 
-**💡 Key Insight:** WhatsApp becomes extremely cost-effective for **two-way conversations** (replies are FREE). SMS charges for every message!
+**💡 Key Insight:** WhatsApp is now **THE CHEAPEST option** - even cheaper than D7 Networks SMS! Plus replies are FREE and you can send rich media (images, documents, buttons).
 
 ---
 
@@ -404,12 +410,14 @@ Meta now uses **Business-Scoped User IDs** instead of phone numbers for candidat
 
 ### ✅ Advantages of This Approach
 
-1. **Ultra-Low Cost:** Only pay 0.50 MAD for first message, all replies FREE
-2. **No Platform Fees:** Meta Cloud API is completely free (0 MAD/month)
-3. **Candidate Preference:** Most people prefer WhatsApp over email/SMS
-4. **Real-time Communication:** Instant messaging improves response rates
-5. **Full Control:** Direct API access, no third-party dependencies
-6. **Scalable:** Can handle 10 or 10,000 candidates with same infrastructure
+1. **Ultra-Low Cost:** Only pay **0.13 MAD** per message, all replies FREE 🎉
+2. **Cheaper than SMS:** 55% cheaper than D7 Networks (the cheapest SMS provider!)
+3. **No Platform Fees:** Meta Cloud API is completely free (0 MAD/month)
+4. **Candidate Preference:** Most people prefer WhatsApp over email/SMS
+5. **Rich Media:** Send images, documents, buttons (not just text like SMS)
+6. **Real-time Communication:** Instant messaging improves response rates
+7. **Full Control:** Direct API access, no third-party dependencies
+8. **Scalable:** Can handle 10 or 10,000 candidates with same infrastructure
 
 ### ⚠️ Considerations
 
@@ -426,16 +434,27 @@ Meta now uses **Business-Scoped User IDs** instead of phone numbers for candidat
 | Phone Number               | ~50 MAD       | ~20 MAD           |
 | MongoDB Atlas (Shared)     | 0 MAD         | 0 MAD (Free tier) |
 | Server Hosting             | 0 MAD\*       | ~100 MAD\*        |
-| WhatsApp Messages (500/mo) | -             | ~250 MAD          |
-| **TOTAL**                  | **~50 MAD**   | **~370 MAD**      |
+| WhatsApp Messages (500/mo) | -             | **~65 MAD** 🎉    |
+| **TOTAL**                  | **~50 MAD**   | **~185 MAD**      |
 
 \*Can use existing infrastructure
 
 **vs Third-Party Provider (Twilio/Infobip):**
 
 - Third-party: ~600-800 MAD/month for 500 messages
-- **Our solution: ~370 MAD/month**
-- **Savings: ~300-430 MAD/month (45-55% cheaper)**
+- **Our WhatsApp solution: ~185 MAD/month**
+- **Savings: ~415-615 MAD/month (70-77% cheaper)** 🚀
+
+**vs D7 Networks SMS (Previously Cheapest Option):**
+
+- D7 Networks: ~165 MAD/month (145 MAD SMS + 20 MAD phone)
+- **Our WhatsApp solution: ~185 MAD/month**
+- **Almost identical cost (~12% more), but:**
+  - ✅ Replies are FREE (D7 charges for every SMS)
+  - ✅ Rich media support (images, docs, buttons)
+  - ✅ Higher engagement (people check WhatsApp more)
+  - ✅ Read receipts and delivery confirmations
+  - ✅ Professional business presence
 
 ---
 
@@ -457,4 +476,4 @@ Meta now uses **Business-Scoped User IDs** instead of phone numbers for candidat
 **Document Status:** Ready for Team Review  
 **Next Update:** After Phase 0 completion  
 **Owner:** Development Team  
-**Reviewed by:** ****\_\_\_**** (Sign off after meeting)
+**Reviewed by:** \***\*\_\_\_\*\*** (Sign off after meeting)
