@@ -1,91 +1,123 @@
-# 📊 Recruitment Platform: WhatsApp Dedicated Number Strategy (2026)
+# 📊 WhatsApp Integration Strategy: Recruitment Platform 2026
 
-**Goal**: To assign a unique, branded WhatsApp number to every client company automatically. This ensures that candidate conversations never collide and provides a 100% professional experience for recruiters.
-
----
-
-## 🏛️ 1. THE META CLOUD SOLUTION
-
-We will integrate with the **Official WhatsApp Cloud API**. This is a server-to-server connection hosted by Meta.
-
-**Scalability**: We can host hundreds of unique +212 numbers under our single company portfolio.
-
-**Compliance**: Zero risk of "bot bans" because we are using official business channels.
-
-**Privacy**: Ready for the June 2026 BSUID update, ensuring candidate data is physically separated between clients.
+**Objective**: To provide a professional, 1-on-1 messaging experience between recruiters and candidates while maintaining total data separation.
 
 ---
 
-## 💼 2. CEO CHECKLIST: ACCOUNT & VERIFICATION
+## 🛠️ Case 1: Direct Client Number (Embedded Signup)
 
-To act as a "Technical Provider" and manage numbers for our clients, our company must be verified by Meta.
+### The Concept
+The client connects their own business number to our platform.
 
-### Steps to Get Ready:
+### The "Pop-up" Experience
+We use **Meta's Embedded Signup**. It is a secure, 4-step wizard that stays on our site.
 
-1. **Create Portfolio**: Create a Meta Business Account at https://business.facebook.com
+### 📱 What the Pop-up Looks Like:
 
-2. **Submit Documents**: Upload these Moroccan legal papers to the "Security Center":
-   - **RC (Registre du Commerce)**: To prove legal existence
-   - **Tax ID (IF/ICE)**: To verify tax status in Morocco
-   - **Utility Bill**: (Water/Electricity) to verify our physical address
+1. **Login**: Client logs into their Facebook (to prove they represent the business)
+2. **Selection**: They select their "Meta Business Portfolio" (Company profile)
+3. **Number Entry**: They type the phone number they want to use
+4. **Verification**: Meta sends a 6-digit code (SMS/Voice) to that number. The client enters it, and the pop-up closes. That's it.
 
-**Timeline**: Verification usually takes 2–5 business days. Once verified, our initial limit of 2 numbers will jump to 20 numbers, and can be increased to unlimited via a support ticket.
+### ✅ Pros & ⚠️ Cons:
+
+| ✅ Pros | ⚠️ Cons |
+|---------|---------|
+| The client "owns" the identity; the number is theirs | **The "Clean Number" Problem**: If they already use this number on the WhatsApp App, they must delete the account from their phone first. It cannot live in both places. |
 
 ---
 
-## 💰 3. COST BREAKDOWN (Morocco 2026)
+## 🛠️ Case 2: LinkoJob Virtual Number (The "Proxy" Solution)
 
-We handle all technical payments to make the service "Invisible" for our clients.
+### The Concept
+LinkoJob provides a dedicated Moroccan (+212) virtual number for the client.
 
-### A. Number Procurement (Monthly Rental)
+### How it handles "Trust"
+To ensure candidates know who is calling, the profile is set up as:
+- **Name**: [Recruiter Name] from [Client Company]
+- **Provider**: Powered by LinkoJob
 
-We use a virtual provider with a REST API (like Telnyx) to buy numbers programmatically the moment a client signs up.
+### 🚀 Implementation Steps:
+
+1. **Instant Provisioning**: Client clicks "Activate Recruitment Line"
+2. **Branding**: We automatically set the WhatsApp Profile Picture to the Client's Logo and the name to "Company X Recruitment"
+3. **Representative Status**: We include a mandatory first message: 
+   > "Hi, I'm [Name] from [Company]. I'm contacting you via our LinkoJob portal regarding your application."
+
+### ✅ Pros & ⚠️ Cons:
+
+| ✅ Pros | Details |
+|---------|---------|
+| **Zero Friction** | The client doesn't have to delete their personal WhatsApp. They can keep their private phone and use our dashboard for work. |
+| **Data Security** | If a recruiter leaves the company, the company keeps the number and all candidate history on our platform. |
+
+---
+
+## 🛠️ Case 3: The "Groups" Logic (Investigation)
+
+### The Concept
+Using a single LinkoJob number and creating a new Group for every Candidate/Client pair.
+
+### 📉 Investigation Findings (Why this is difficult):
+
+| Issue | Explanation |
+|-------|-------------|
+| **No "Direct Add"** | Per Meta 2026 API rules, you cannot force a candidate into a group. You must send them a link, and they must click "Join." |
+| **High Friction** | Candidates are unlikely to join a group just to talk to a recruiter. It feels like "extra work." |
+| **API Limits** | Groups created via API have strict participant limits and do not support "Template Messages" (the required first message for businesses). |
+
+---
+
+## 📈 Comparison Summary for Decision
+
+| Feature | Case 1: Client Number | Case 2: Virtual Number | Case 3: Groups |
+|---------|------------------------|------------------------|----------------|
+| **Setup Ease** | Medium (Requires 2FA/Docs) | **High (One-click)** | Low (Invite Link) |
+| **Candidate Trust** | High | High (with proper branding) | Low |
+| **Complexity** | Low | **Low** | Very High |
+| **Client Requirement** | Must delete existing WA App | **None** | None |
+
+---
+
+## 🔗 Reference Links & Costs (Rest of Africa/Morocco 2026)
+
+### 📋 Administrative Requirements
+
+**Required Docs**: 
+- RC (Registre du Commerce)
+- Tax ID (IF/ICE)
+- Utility Bill matching the address
+
+**Status**: LinkoJob must be a verified Meta Tech Provider
+
+---
+
+### 💰 Estimated Costs
 
 | Item | Cost (USD) | Cost (MAD) | Frequency |
 |------|------------|------------|-----------|
-| Moroccan Virtual Mobile (+212) | $1.00 | ~10.50 MAD | Monthly |
-| SMS/Voice Capability | $0.10 | ~1.05 MAD | Monthly |
-| **Total per Client** | **$1.10** | **~11.55 MAD** | **Monthly** |
-
-### B. Messaging Fees (Usage)
-
-We pay only for the messages actually delivered. Morocco is in the "Rest of Africa" regional tier.
-
-| Action | Meta Category | Cost (MAD) |
-|--------|---------------|------------|
-| Recruiter reaches out | Utility Template | ~0.05 MAD |
-| Candidate replies | Service Message | **FREE** |
-| Rolling 24h Chat | Service Message | **FREE** |
+| **Virtual Number (+212)** | ~$1.00 | ~10.50 MAD | Monthly |
+| **Messaging (Meta Fee)** | | | |
+| - Marketing/Outreach | ~$0.038 | ~0.40 MAD | Per delivered message |
+| - Service/Replies | $0.00 | **FREE** | Within 24h window |
 
 ---
 
-## 🛠️ 4. THE PROVISIONING PIPELINE (Microservice Flow)
+## 🌐 Official Resources
 
-As a developer, I will build an automated pipeline that triggers the moment a client purchases a "Recruitment Pack."
-
-1. **Procurement**: The microservice calls the Telnyx API to purchase a new Moroccan number.
-
-2. **Meta Linkage**: The service calls Meta's `/phone_numbers` endpoint to add that number to our Business Account.
-
-3. **Automated OTP**:
-   - We request a 6-digit verification code from Meta via Voice Call
-   - The microservice "listens" to the Telnyx call log API to catch the 6-digit code automatically
-   - The service submits the code to Meta to activate the line
-
-4. **Routing Entry**: We save the new `phone_number_id` in our MongoDB linked to the `Company_ID`.
+- **Meta Cloud API Documentation**: https://developers.facebook.com/docs/whatsapp/cloud-api
+- **WhatsApp Embedded Signup Flow**: https://developers.facebook.com/docs/whatsapp/embedded-signup
 
 ---
 
-## 🏗️ 5. MULTI-TENANT WEBHOOK ROUTING
+## 🎯 Recommended Approach
 
-Since Meta sends all candidate replies to one single Webhook URL, the microservice will perform "Traffic Control":
+**Case 2: Virtual Number** is the optimal solution because:
 
-**Step 1**: Meta sends a JSON payload to our `/webhook`.
+✅ **Lowest friction** for clients  
+✅ **Professional branding** with client logo  
+✅ **Data ownership** stays with platform  
+✅ **No personal WhatsApp conflicts**  
+✅ **Scalable** for hundreds of clients  
+✅ **Cost-effective** at ~11.55 MAD/month per client
 
-**Step 2**: Microservice extracts the `metadata.phone_number_id`.
-
-**Step 3**: System queries MongoDB to see which company owns that specific ID.
-
-**Step 4**: System uses Socket.io to push the candidate's message only to that company's recruiters.
-
-**Result**: Companies are 100% isolated. They get a dedicated, branded identity for only ~11.50 MAD/month plus a few centimes per candidate contacted.
