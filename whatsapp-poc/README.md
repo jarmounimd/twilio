@@ -16,12 +16,14 @@ whatsapp-poc/
 ## Next Steps
 
 ### 1. Install Dependencies
+
 ```bash
 cd whatsapp-poc
 npm install
 ```
 
 ### 2. Configure Environment
+
 ```bash
 # Copy the example file
 copy .env.example .env
@@ -33,12 +35,15 @@ copy .env.example .env
 ```
 
 ### 3. Start the Server
+
 ```bash
 npm start
 ```
 
 ### 4. Expose with ngrok
+
 Open a new terminal and run:
+
 ```bash
 ngrok http 3000
 ```
@@ -46,13 +51,17 @@ ngrok http 3000
 Copy the https URL (e.g., `https://abc123.ngrok.io`)
 
 ### 5. Configure Meta Webhook
+
 Go to Meta Business Manager → Your App → WhatsApp → Configuration:
+
 - Callback URL: `https://abc123.ngrok.io/webhook`
 - Verify Token: (same as in your .env file)
 - Subscribe to: messages
 
 ### 6. Test Embedded Signup
+
 The OAuth URL format:
+
 ```
 https://www.facebook.com/v21.0/dialog/oauth?
   client_id=YOUR_APP_ID
@@ -62,11 +71,13 @@ https://www.facebook.com/v21.0/dialog/oauth?
 ```
 
 ### 7. Test Sending Messages
+
 ```
 http://localhost:3000/test-send?clientId=CLIENT_ID&to=212XXXXXXXXX&message=Hello
 ```
 
 ### 8. View Connected Clients
+
 ```
 http://localhost:3000/clients
 ```

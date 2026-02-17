@@ -16,6 +16,7 @@
 ### **Core Use Cases**
 
 #### **UC1: Initiate Contact via Template**
+
 - **Actor**: Recruiter
 - **Description**: Send first message using Meta-approved utility template
 - **Key Technology**: HTTPS POST to Meta Cloud API
@@ -23,6 +24,7 @@
 - **Database Impact**: INSERT new conversation + message record
 
 #### **UC2: Send Free-form Reply**
+
 - **Actor**: Recruiter
 - **Description**: Send conversational message within 24-hour window
 - **Key Technology**: HTTPS POST to Meta Cloud API
@@ -30,6 +32,7 @@
 - **Database Impact**: INSERT message record
 
 #### **UC3: Receive & Parse Webhook**
+
 - **Actor**: Meta Cloud API
 - **Description**: Process incoming candidate replies
 - **Key Technology**: Express.js webhook endpoint `/webhook/whatsapp`
@@ -37,6 +40,7 @@
 - **Database Impact**: Triggers message storage
 
 #### **UC4: Store Message History**
+
 - **Actor**: System
 - **Description**: Persist all messages (inbound/outbound) to MongoDB
 - **Collections**: `conversations`, `messages`
@@ -44,6 +48,7 @@
 - **Retention**: Indefinite (subject to GDPR deletion requests)
 
 #### **UC5: Broadcast Real-time UI Update**
+
 - **Actor**: System
 - **Description**: Push message updates to recruiter UI via WebSocket
 - **Key Technology**: Socket.io v4.x
@@ -51,6 +56,7 @@
 - **Latency**: < 100ms from webhook receipt
 
 #### **UC6: Fetch Conversation History**
+
 - **Actor**: Recruiter
 - **Description**: Retrieve past messages with candidate
 - **API Endpoint**: `GET /api/conversations/:candidateId`
@@ -58,6 +64,7 @@
 - **Database**: Query MongoDB `messages` collection
 
 #### **UC7: Verify Webhook Signature**
+
 - **Actor**: System (Security Layer)
 - **Description**: Validate webhook authenticity using Meta app secret
 - **Algorithm**: HMAC-SHA256
@@ -68,20 +75,21 @@
 
 ## Key Technologies
 
-| Component | Technology | Purpose |
-|-----------|-----------|---------|
-| **Meta Cloud API** | WhatsApp Business Cloud API | Message delivery (0.13 MAD/msg) |
-| **Database** | MongoDB Atlas | Conversation & message storage |
-| **Real-time** | Socket.io v4.x | Live UI updates to recruiters |
-| **Backend** | Node.js v20 LTS + Express v4.x | REST API + webhook server |
-| **Security** | HMAC-SHA256 | Webhook signature verification |
-| **Deployment** | ngrok (dev) → Azure/AWS (prod) | Public webhook endpoint |
+| Component          | Technology                     | Purpose                         |
+| ------------------ | ------------------------------ | ------------------------------- |
+| **Meta Cloud API** | WhatsApp Business Cloud API    | Message delivery (0.13 MAD/msg) |
+| **Database**       | MongoDB Atlas                  | Conversation & message storage  |
+| **Real-time**      | Socket.io v4.x                 | Live UI updates to recruiters   |
+| **Backend**        | Node.js v20 LTS + Express v4.x | REST API + webhook server       |
+| **Security**       | HMAC-SHA256                    | Webhook signature verification  |
+| **Deployment**     | ngrok (dev) → Azure/AWS (prod) | Public webhook endpoint         |
 
 ---
 
 ## Message Flow
 
 ### **Outbound Flow (Recruiter → Candidate)**
+
 1. Recruiter clicks "Send" in UI
 2. Frontend calls `POST /api/whatsapp/send-template`
 3. Backend validates template and candidate consent
@@ -92,6 +100,7 @@
 8. Meta sends webhook when read → Update status to `read`
 
 ### **Inbound Flow (Candidate → Recruiter)**
+
 1. Candidate replies via WhatsApp app
 2. Meta Cloud API calls `POST /webhook/whatsapp`
 3. System verifies webhook signature (UC7)
@@ -105,6 +114,7 @@
 ## Database Schema
 
 ### **conversations** Collection
+
 ```javascript
 {
   _id: ObjectId,
@@ -121,6 +131,7 @@
 ```
 
 ### **messages** Collection
+
 ```javascript
 {
   _id: ObjectId,
@@ -142,31 +153,33 @@
 
 ## API Endpoints
 
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| POST | `/api/whatsapp/send-template` | Send initial template message | Bearer Token |
-| POST | `/api/whatsapp/send-message` | Send free-form message (24h window) | Bearer Token |
-| POST | `/webhook/whatsapp` | Receive Meta webhooks | Signature Verification |
-| GET | `/webhook/whatsapp` | Webhook verification challenge | Public |
-| GET | `/api/conversations/:candidateId` | Get conversation history | Bearer Token |
-| GET | `/api/conversations` | List all conversations | Bearer Token |
+| Method | Endpoint                          | Description                         | Auth                   |
+| ------ | --------------------------------- | ----------------------------------- | ---------------------- |
+| POST   | `/api/whatsapp/send-template`     | Send initial template message       | Bearer Token           |
+| POST   | `/api/whatsapp/send-message`      | Send free-form message (24h window) | Bearer Token           |
+| POST   | `/webhook/whatsapp`               | Receive Meta webhooks               | Signature Verification |
+| GET    | `/webhook/whatsapp`               | Webhook verification challenge      | Public                 |
+| GET    | `/api/conversations/:candidateId` | Get conversation history            | Bearer Token           |
+| GET    | `/api/conversations`              | List all conversations              | Bearer Token           |
 
 ---
 
 ## Cost Analysis
 
-| Message Type | Cost per Message | Use Case |
-|--------------|------------------|----------|
-| **Utility Template** | 0.13 MAD ($0.0126 USD) | First contact with candidate |
-| **Free-form Reply** | FREE | Follow-up within 24 hours |
-| **Service Message** | FREE | Candidate replies (always free) |
+| Message Type         | Cost per Message       | Use Case                        |
+| -------------------- | ---------------------- | ------------------------------- |
+| **Utility Template** | 0.13 MAD ($0.0126 USD) | First contact with candidate    |
+| **Free-form Reply**  | FREE                   | Follow-up within 24 hours       |
+| **Service Message**  | FREE                   | Candidate replies (always free) |
 
 **Example Costs:**
+
 - 50 candidates: 50 × 0.13 MAD = **6.50 MAD**
 - 500 candidates: 500 × 0.13 MAD = **65 MAD**
 - 2,000 candidates: 2,000 × 0.13 MAD = **260 MAD**
 
 **Compared to SMS (D7 Networks: 0.29 MAD/SMS):**
+
 - WhatsApp is **55% cheaper**
 - FREE replies within 24h (SMS charges both ways)
 
@@ -175,20 +188,22 @@
 ## Security & Compliance
 
 ### **Webhook Signature Verification**
+
 ```javascript
-const crypto = require('crypto');
+const crypto = require("crypto");
 
 function verifyWebhookSignature(payload, signature, appSecret) {
   const expectedSignature = crypto
-    .createHmac('sha256', appSecret)
+    .createHmac("sha256", appSecret)
     .update(payload)
-    .digest('hex');
-  
+    .digest("hex");
+
   return `sha256=${expectedSignature}` === signature;
 }
 ```
 
 ### **GDPR Compliance**
+
 - `hasConsent` flag in conversations collection
 - Opt-out handling via `STOP` keyword
 - Right to deletion: `DELETE /api/conversations/:id`
@@ -199,6 +214,7 @@ function verifyWebhookSignature(payload, signature, appSecret) {
 ## Development Phases
 
 ### **Phase 1: Core Messaging** (Week 1-2)
+
 - ✅ UC1: Send template message
 - ✅ UC3: Receive webhook
 - ✅ UC4: Store in MongoDB
@@ -206,53 +222,56 @@ function verifyWebhookSignature(payload, signature, appSecret) {
 - ✅ Basic UI to send/receive
 
 ### **Phase 2: Real-Time Updates** (Week 2-3)
+
 - ✅ UC5: WebSocket integration
 - ✅ Message status tracking (delivered/read)
 - ✅ Notification system
 
 ### **Phase 3: Full Features** (Week 3-4)
+
 - ✅ UC6: Conversation history
 - ✅ UC2: Free-form replies
 - ✅ Search functionality
 - ✅ Analytics dashboard
 
 ### **Phase 4: Production** (Week 4+)
+
 - ✅ GDPR deletion
 - ✅ Error handling & retry logic
 - ✅ Deployment to Azure/AWS
 - ✅ Monitoring & alerting
 
-| Use Case | Description | Actor | Database Impact |
-|----------|-------------|-------|----------------|
-| **Send Template Message** | Send first message using approved template | Recruiter → WhatsApp API | INSERT conversation + message |
-| **Receive Message** | Process incoming message from candidate | WhatsApp API → System | INSERT message |
-| **Store Conversation** | Save all messages to MongoDB | System | INSERT/UPDATE documents |
-| **Receive Webhook** | Accept and verify webhooks from Meta | WhatsApp API → System | Triggers message processing |
-| **Track Message Status** | Update delivery/read status | WhatsApp API → System | UPDATE message status |
-| **Broadcast via WebSocket** | Send real-time updates to UI | System → Recruiter | READ from DB |
-| **Retrieve History** | Get conversation history for candidate | Recruiter → System | READ conversations |
+| Use Case                    | Description                                | Actor                    | Database Impact               |
+| --------------------------- | ------------------------------------------ | ------------------------ | ----------------------------- |
+| **Send Template Message**   | Send first message using approved template | Recruiter → WhatsApp API | INSERT conversation + message |
+| **Receive Message**         | Process incoming message from candidate    | WhatsApp API → System    | INSERT message                |
+| **Store Conversation**      | Save all messages to MongoDB               | System                   | INSERT/UPDATE documents       |
+| **Receive Webhook**         | Accept and verify webhooks from Meta       | WhatsApp API → System    | Triggers message processing   |
+| **Track Message Status**    | Update delivery/read status                | WhatsApp API → System    | UPDATE message status         |
+| **Broadcast via WebSocket** | Send real-time updates to UI               | System → Recruiter       | READ from DB                  |
+| **Retrieve History**        | Get conversation history for candidate     | Recruiter → System       | READ conversations            |
 
 ### Priority 2: Important (Post-MVP)
 
-| Use Case | Description | Actor | Database Impact |
-|----------|-------------|-------|----------------|
-| **Send Free-Form Message** | Send message during 24h window | Recruiter → WhatsApp API | INSERT message |
-| **Notify Recruiter** | Alert recruiter of new reply | System → Recruiter | READ + WebSocket emit |
-| **Search Conversations** | Find conversations by keyword/candidate | Recruiter → System | READ with text search |
-| **Update Message Status** | Mark as delivered/read/failed | System | UPDATE message status |
-| **Check Consent** | Verify candidate gave WhatsApp consent | System | READ candidate consent |
-| **Parse Message** | Extract message content from webhook | System | N/A (in-memory) |
+| Use Case                   | Description                             | Actor                    | Database Impact        |
+| -------------------------- | --------------------------------------- | ------------------------ | ---------------------- |
+| **Send Free-Form Message** | Send message during 24h window          | Recruiter → WhatsApp API | INSERT message         |
+| **Notify Recruiter**       | Alert recruiter of new reply            | System → Recruiter       | READ + WebSocket emit  |
+| **Search Conversations**   | Find conversations by keyword/candidate | Recruiter → System       | READ with text search  |
+| **Update Message Status**  | Mark as delivered/read/failed           | System                   | UPDATE message status  |
+| **Check Consent**          | Verify candidate gave WhatsApp consent  | System                   | READ candidate consent |
+| **Parse Message**          | Extract message content from webhook    | System                   | N/A (in-memory)        |
 
 ### Priority 3: Nice-to-Have (Future)
 
-| Use Case | Description | Actor | Database Impact |
-|----------|-------------|-------|----------------|
-| **Create Template** | Define new message template | Recruiter → System | INSERT template |
-| **Handle Opt-Out** | Process candidate stop request | Candidate → System | UPDATE conversation closed |
-| **Delete Data (GDPR)** | Remove all candidate data | System | DELETE candidate data |
-| **Generate Cost Report** | Calculate WhatsApp API costs | System → Recruiter | READ + aggregate messages |
-| **Track Delivery Rate** | Monitor message delivery success | System | READ + calculate metrics |
-| **Archive Old Conversations** | Move old conversations to archive | System (scheduled) | UPDATE archived flag |
+| Use Case                      | Description                       | Actor              | Database Impact            |
+| ----------------------------- | --------------------------------- | ------------------ | -------------------------- |
+| **Create Template**           | Define new message template       | Recruiter → System | INSERT template            |
+| **Handle Opt-Out**            | Process candidate stop request    | Candidate → System | UPDATE conversation closed |
+| **Delete Data (GDPR)**        | Remove all candidate data         | System             | DELETE candidate data      |
+| **Generate Cost Report**      | Calculate WhatsApp API costs      | System → Recruiter | READ + aggregate messages  |
+| **Track Delivery Rate**       | Monitor message delivery success  | System             | READ + calculate metrics   |
+| **Archive Old Conversations** | Move old conversations to archive | System (scheduled) | UPDATE archived flag       |
 
 ---
 
@@ -322,12 +341,14 @@ Based on the use cases above:
 ## API Endpoints Required
 
 ### Messaging Endpoints
+
 - `POST /api/whatsapp/send-template` - Send template message
 - `POST /api/whatsapp/send-message` - Send free-form message
 - `POST /webhook/whatsapp` - Receive Meta webhooks
 - `GET /webhook/whatsapp` - Webhook verification
 
 ### Conversation Endpoints
+
 - `GET /api/conversations/:candidateId` - Get conversation history
 - `GET /api/conversations` - List all conversations (with pagination)
 - `POST /api/conversations/search` - Search conversations
@@ -335,15 +356,18 @@ Based on the use cases above:
 - `DELETE /api/conversations/:id` - Delete conversation (GDPR)
 
 ### Message Endpoints
+
 - `GET /api/messages/:conversationId` - Get messages for conversation
 - `PATCH /api/messages/:id/status` - Update message status
 
 ### Template Endpoints
+
 - `GET /api/templates` - List available templates
 - `POST /api/templates` - Create new template
 - `GET /api/templates/:id` - Get template details
 
 ### Analytics Endpoints
+
 - `GET /api/analytics/delivery-rate` - Get delivery rate stats
 - `GET /api/analytics/response-time` - Get response time metrics
 - `GET /api/analytics/costs` - Get cost breakdown
@@ -353,10 +377,12 @@ Based on the use cases above:
 ## WebSocket Events
 
 ### Client → Server
+
 - `subscribe:conversation` - Subscribe to conversation updates
 - `mark:read` - Mark messages as read
 
 ### Server → Client
+
 - `message:received` - New message from candidate
 - `message:sent` - Message sent successfully
 - `message:delivered` - Message delivered to candidate
@@ -369,6 +395,7 @@ Based on the use cases above:
 ## Development Phases
 
 ### Phase 1: Core Messaging (Week 1-2)
+
 - ✅ Send template message
 - ✅ Receive webhook
 - ✅ Parse incoming message
@@ -376,18 +403,21 @@ Based on the use cases above:
 - ✅ Basic UI to send/receive
 
 ### Phase 2: Real-Time Updates (Week 2-3)
+
 - ✅ WebSocket integration
 - ✅ Broadcast message updates
 - ✅ Notify recruiter of replies
 - ✅ Message status tracking
 
 ### Phase 3: Full Features (Week 3-4)
+
 - ✅ Conversation history
 - ✅ Search functionality
 - ✅ Template management
 - ✅ Analytics dashboard
 
 ### Phase 4: Compliance & Production (Week 4+)
+
 - ✅ Consent tracking
 - ✅ Opt-out handling
 - ✅ GDPR deletion
