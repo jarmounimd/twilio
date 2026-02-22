@@ -66,21 +66,21 @@ Stores recruiter/company accounts with WhatsApp connection.
 ```javascript
 {
   _id: ObjectId,
-  companyName: String,              
-  email: String,                    
-  userId: ObjectId,                 
-  
+  companyName: String,
+  email: String,
+  userId: ObjectId,
+
   // WhatsApp Connection
   whatsappNumber: String,           // "+212600111222"
   phoneNumberId: String,            // "1054543651068213" (Meta identifier)
   accessToken: String,              // Encrypted token
   tokenExpiry: Date,                // Token expiration
-  
+
   // Status
   status: String,                   // "active" | "disconnected" | "suspended"
   connectedAt: Date,
   disconnectedAt: Date,
-  
+
   // Metadata
   createdAt: Date,
   updatedAt: Date
@@ -88,6 +88,7 @@ Stores recruiter/company accounts with WhatsApp connection.
 ```
 
 **Indexes**:
+
 - `phoneNumberId` (unique)
 - `userId`
 - `status`
@@ -102,12 +103,12 @@ Stores all WhatsApp conversations between recruiters and candidates.
 {
   _id: ObjectId,
   clientId: ObjectId,               // ref: clients
-  
+
   // Candidate Info
   candidatePhone: String,           // "212638167216"
   candidateName: String,            // "Ahmed Hassan" (optional)
   candidateId: ObjectId,            // ref: candidates (if exists in your system)
-  
+
   // Messages Array
   messages: [
     {
@@ -124,17 +125,17 @@ Stores all WhatsApp conversations between recruiters and candidates.
       errorMessage: String          // If status=failed
     }
   ],
-  
+
   // Conversation Stats
   messageCount: Number,
   lastMessageAt: Date,
   lastMessageFrom: String,          // "client" | "candidate"
   unreadCount: Number,              // Messages candidate sent but recruiter hasn't read
-  
+
   // Window Status
   inWindow: Boolean,                // True if within 24h window (free replies)
   windowExpiresAt: Date,            // When free window closes
-  
+
   // Metadata
   createdAt: Date,
   updatedAt: Date
@@ -142,6 +143,7 @@ Stores all WhatsApp conversations between recruiters and candidates.
 ```
 
 **Indexes**:
+
 - `clientId` + `candidatePhone` (compound, unique)
 - `clientId` + `lastMessageAt`
 - `lastMessageAt` (for sorting)
@@ -158,12 +160,12 @@ Stores approved WhatsApp message templates.
   name: String,                     // "job_opportunity"
   language: String,                 // "fr" | "ar" | "en"
   category: String,                 // "MARKETING" | "UTILITY"
-  
+
   // Template Content
   header: String,                   // Optional header text
   body: String,                     // Main message with {{1}}, {{2}} variables
   footer: String,                   // Optional footer
-  
+
   // Variables
   variables: [
     {
@@ -172,15 +174,15 @@ Stores approved WhatsApp message templates.
       description: String           // "Candidate's first name"
     }
   ],
-  
+
   // Meta Status
   metaTemplateId: String,           // Meta's template ID
   status: String,                   // "pending" | "approved" | "rejected"
-  
+
   // Usage Stats
   usageCount: Number,               // How many times used
   lastUsedAt: Date,
-  
+
   // Metadata
   createdAt: Date,
   updatedAt: Date
@@ -188,6 +190,7 @@ Stores approved WhatsApp message templates.
 ```
 
 **Indexes**:
+
 - `name` + `language` (compound, unique)
 - `status`
 
@@ -210,6 +213,7 @@ Logs all webhook events from Meta.
 ```
 
 **Indexes**:
+
 - `phoneNumberId`
 - `createdAt` (TTL: auto-delete after 30 days)
 
@@ -418,7 +422,10 @@ db.clients.createIndex({ phoneNumberId: 1 }, { unique: true });
 db.clients.createIndex({ userId: 1 });
 
 // conversations
-db.conversations.createIndex({ clientId: 1, candidatePhone: 1 }, { unique: true });
+db.conversations.createIndex(
+  { clientId: 1, candidatePhone: 1 },
+  { unique: true },
+);
 db.conversations.createIndex({ clientId: 1, lastMessageAt: -1 });
 db.conversations.createIndex({ lastMessageAt: -1 });
 
@@ -434,24 +441,28 @@ db.webhookLogs.createIndex({ createdAt: 1 }, { expireAfterSeconds: 2592000 }); /
 ## ✅ Implementation Priority
 
 **Phase 1** (Week 1):
+
 1. Setup project structure
 2. MongoDB schemas & models
 3. OAuth flow (auth routes)
 4. Basic webhook handler
 
 **Phase 2** (Week 2):
+
 1. Message sending logic
 2. Message receiving & storage
 3. Socket.io integration
 4. Token encryption/refresh
 
 **Phase 3** (Week 3):
+
 1. Template management
 2. Error handling
 3. Security hardening
 4. Testing
 
 **Phase 4** (Week 4):
+
 1. Deployment
 2. Monitoring
 3. Documentation
